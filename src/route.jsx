@@ -4,10 +4,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
 import NotFound from './pages/NotFound'
 import Auth from './pages/Auth'
+import Home from './pages/Home'
 import Install from './pages/Install'
 import Search from './pages/Search'
 import Report from './pages/Report'
 import TurnOFF from './pages/TurnOFF'
+import Welcome from './pages/Welcome'
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,10 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
     children: [
+      {
+        path: '/home',
+        element: <Home />,
+      },
       {
         path: '/auth/:type',
         element: <Auth />,
@@ -34,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/turnoff/:id',
         element: <TurnOFF />,
+      },
+      {
+        path: '/welcome',
+        element: <Welcome />,
       },
     ],
   },
