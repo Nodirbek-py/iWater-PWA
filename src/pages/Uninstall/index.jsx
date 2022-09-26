@@ -1,12 +1,11 @@
 import React from 'react'
-import TextField from '@mui/material/TextField'
 import { Link } from 'react-router-dom'
+import TextField from '@mui/material/TextField'
 
 import Typography from '../../components/Typography'
 import Button from '../../components/Button'
-import Alert from '../../components/Alert'
 
-const Report = () => {
+const Uninstall = () => {
   return (
     <div className='flex flex-col justify-center relative mx-auto w-5/6'>
       <Typography
@@ -42,7 +41,7 @@ const Report = () => {
         variant='standard'
         className='!mb-6'
       />
-      <div className='bg-red-200 px-5 py-6 mb-4'>
+      <div className='bg-red-200 px-5 py-6 mb-9'>
         <TextField
           id='standard-basic'
           label='Enter Date of Issue'
@@ -54,7 +53,7 @@ const Report = () => {
           id='standard-basic'
           label='Description of Complaint/Issue'
           value='Add a description in detail of the issue or complaint in this space provided. We thank you
-          for helping us improve!'
+    for helping us improve!'
           variant='standard'
           className='w-full'
           rows={3}
@@ -62,25 +61,11 @@ const Report = () => {
           multiline
         />
       </div>
-      <div className='flex flex-wrap'>
-        <Link to='/turnoff/24' className='block mx-auto'>
-          <Button title='TURN OFF' type='red' className='w-auto mx-auto mb-4' />
-        </Link>
-        <Link to='/success' className='block mx-auto'>
-          <Button title='REPORT ONLY' type='red' className='w-auto mx-auto mb-4' />
-        </Link>
-        <Link to='/uninstall/24' className='block mx-auto'>
-          <Button title='UNINSTALL' type='red' className='w-auto mx-auto mb-4' />
-        </Link>
-      </div>
-      <Alert
-        className='mb-5'
-        title='ATTENTION'
-        body='Turning off the device will keep it in high flow mode but the device
-will continue to collect shower data. '
-      />
+      <Link to='/success' className='block mx-auto'>
+        <Button title='DEACTIVATE' type='red' className='w-auto mx-auto mb-4' />
+      </Link>
     </div>
   )
 }
 
-export default Report
+export default Uninstall

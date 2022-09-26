@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Typography from '../Typography'
 import infoIcon from '../../assets/icons/info.svg'
 
-const Alert = ({ title, body, className }) => {
+const Alert = ({ title, body, className, color }) => {
   return (
     <div
       className={
@@ -16,11 +16,11 @@ const Alert = ({ title, body, className }) => {
       </div>
       <div className='w-11/12'>
         <div className='flex items-center justify-between w-full'>
-          <Typography text={title} type='blue' />
+          <Typography style={{ width: '75%' }} text={title} type='blue' />
           <Typography style={{ fontSize: 14 }} text='Note' type='blue' />
         </div>
         <div>
-          <Typography style={{ marginTop: 8 }} text={body} type='info' />
+          <Typography style={{ marginTop: 8, color }} text={body} type='info' />
         </div>
       </div>
     </div>
@@ -31,6 +31,7 @@ Alert.propTypes = {
   title: PropTypes.string,
   body: PropTypes.string,
   className: PropTypes.string,
+  color: PropTypes.string,
 }
 
 export default Alert

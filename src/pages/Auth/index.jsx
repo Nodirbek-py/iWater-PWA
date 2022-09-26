@@ -9,7 +9,7 @@ import '../../index.css'
 const Auth = () => {
   const { type } = useParams()
   return (
-    <div className='flex justify-center flex-col mx-auto w-3/4'>
+    <div className='flex justify-center flex-col mx-auto w-5/6'>
       {type === 'login' ? (
         <>
           <TextField
@@ -72,8 +72,8 @@ const Auth = () => {
             className='!mb-14'
             onFocus={(e) => e.target.type === 'password'}
           />
-          <Link exact to='/home' relative='/'>
-            <Button className='w-28 mx-auto' title='REGISTER' type='blue' />
+          <Link exact to='/home' relative='/' className='mx-auto'>
+            <Button className='w-auto mx-auto' title='REGISTER' type='blue' />
           </Link>
         </>
       )}

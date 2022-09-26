@@ -7,8 +7,10 @@ import Auth from './pages/Auth'
 import Home from './pages/Home'
 import Install from './pages/Install'
 import Search from './pages/Search'
+import Success from './pages/Success'
 import Report from './pages/Report'
 import TurnOFF from './pages/TurnOFF'
+import Uninstall from './pages/Uninstall'
 import Welcome from './pages/Welcome'
 
 const router = createBrowserRouter([
@@ -42,8 +44,16 @@ const router = createBrowserRouter([
         element: <TurnOFF />,
       },
       {
+        path: '/uninstall/:id',
+        element: <Uninstall />,
+      },
+      {
         path: '/welcome',
         element: <Welcome />,
+      },
+      {
+        path: '/success',
+        element: <Success />,
       },
     ],
   },

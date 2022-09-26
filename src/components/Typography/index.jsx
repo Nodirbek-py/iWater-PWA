@@ -5,7 +5,7 @@ const Typography = ({ text, type, style }) => {
   switch (type) {
     case 'error':
       return (
-        <p style={style} className='text-red-600 text-center font-medium'>
+        <p style={style} className='text-red-500 text-center font-medium'>
           {text}
         </p>
       )
