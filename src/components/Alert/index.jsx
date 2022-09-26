@@ -4,9 +4,13 @@ import PropTypes from 'prop-types'
 import Typography from '../Typography'
 import infoIcon from '../../assets/icons/info.svg'
 
-const Alert = ({ title, body }) => {
+const Alert = ({ title, body, className }) => {
   return (
-    <div className='p-4 border border-sky-400 rounded flex justify-between min-h-min min-w-full'>
+    <div
+      className={
+        'p-4 border border-sky-400 rounded flex justify-between min-h-min min-w-full ' + className
+      }
+    >
       <div className='w-1/12 mr-3'>
         <img src={infoIcon} alt='Info icon' />
       </div>
@@ -26,6 +30,7 @@ const Alert = ({ title, body }) => {
 Alert.propTypes = {
   title: PropTypes.string,
   body: PropTypes.string,
+  className: PropTypes.string,
 }
 
 export default Alert

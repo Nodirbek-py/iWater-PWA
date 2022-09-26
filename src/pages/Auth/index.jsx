@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
+import { useParams, Link } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
 
 import Button from '../../components/Button'
@@ -8,11 +8,8 @@ import '../../index.css'
 
 const Auth = () => {
   const { type } = useParams()
-  useEffect(() => {
-    console.log(type)
-  }, [])
   return (
-    <div className='flex justify-center flex-col'>
+    <div className='flex justify-center flex-col mx-auto w-3/4'>
       {type === 'login' ? (
         <>
           <TextField
@@ -29,8 +26,12 @@ const Auth = () => {
             variant='standard'
             className='!mb-14'
           />
-          <Button className='mb-9 w-28 mx-auto' title='LOGIN' type='red' />
-          <Button className='mb-20 w-28 mx-auto' title='REGISTER' type='blue' />
+          <Link exact to='/home' relative='/' className='mx-auto'>
+            <Button className='mb-9 w-28' title='LOGIN' type='red' />
+          </Link>
+          <Link exact to='/auth/register' className='mx-auto'>
+            <Button className='mb-20 w-28' title='REGISTER' type='blue' />
+          </Link>
           <Typography
             style={{ fontWeight: 400 }}
             text='Is this your first time to login? Register first.'
@@ -71,7 +72,9 @@ const Auth = () => {
             className='!mb-14'
             onFocus={(e) => e.target.type === 'password'}
           />
-          <Button className='w-28 mx-auto' title='REGISTER' type='blue' />
+          <Link exact to='/home' relative='/'>
+            <Button className='w-28 mx-auto' title='REGISTER' type='blue' />
+          </Link>
         </>
       )}
     </div>
