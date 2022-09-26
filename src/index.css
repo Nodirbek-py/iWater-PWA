@@ -30,3 +30,8 @@ body {
   width: 100%;
   margin: 0 auto;
 }
+
+
+.placeholder__black input::placeholder {
+  color: black !important;
+}
