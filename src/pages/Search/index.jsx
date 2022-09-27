@@ -40,10 +40,7 @@ const Search = () => {
           <Suggestion>Ley</Suggestion>
         </SuggestionWrapper>
       )}
-      <Link
-        to={pathname !== '/install' || pathname !== '/install/' ? '/report/24' : '/install/24'}
-        className='mx-auto'
-      >
+      <Link to={pathname !== '/install/' ? '/report/24' : '/install/24'} className='mx-auto'>
         <Button
           className={onFocus ? 'w-28 mx-auto mt-32' : 'w-28 mx-auto'}
           type='red'
