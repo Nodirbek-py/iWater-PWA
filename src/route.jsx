@@ -6,6 +6,7 @@ import NotFound from './pages/NotFound'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
 import Install from './pages/Install'
+import InstallComplete from './pages/InstallComplete'
 import Search from './pages/Search'
 import Success from './pages/Success'
 import Report from './pages/Report'
@@ -29,7 +30,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/install',
+        element: <Search />,
+      },
+      {
+        path: '/install/:id',
         element: <Install />,
+      },
+      {
+        path: '/install/:id/complete',
+        element: <InstallComplete />,
       },
       {
         path: '/report',
@@ -53,6 +62,10 @@ const router = createBrowserRouter([
       },
       {
         path: '/success',
+        element: <Success />,
+      },
+      {
+        path: '/success/install',
         element: <Success />,
       },
     ],

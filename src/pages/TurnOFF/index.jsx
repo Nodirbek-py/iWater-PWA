@@ -21,7 +21,9 @@ const TurnOFF = () => {
           <MobileDatePicker
             label='Turn On Date'
             inputFormat='MM/DD/YYYY'
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField {...params} variant='standard' className='w-10/12' />
+            )}
           />
         </LocalizationProvider>
       </div>
