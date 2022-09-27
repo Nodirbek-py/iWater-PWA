@@ -12,7 +12,7 @@ const Success = () => {
   console.log(pathname)
   return (
     <div className='flex flex-col justify-center items-center relative mx-auto w-5/6 mt-32 h-96'>
-      {pathname !== '/success/install' ? (
+      {pathname !== '/success/install' || pathname !== '/success/install/' ? (
         <>
           <Typography text='SUCCESS' type='error' style={{ marginBottom: 140 }} />
           <Link to='/welcome'>
