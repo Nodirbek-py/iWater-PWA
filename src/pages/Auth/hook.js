@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const useHook = () => {
@@ -13,9 +13,17 @@ const useHook = () => {
   })
 
   const { type } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (type === 'login') setCreated(false)
+    setForm({
+      username: '',
+      email: '',
+      password1: '',
+      password2: '',
+    })
+    setError([])
   }, [type])
 
   const changeHandler = (event) => {
@@ -36,7 +44,28 @@ const useHook = () => {
       setError(errors)
     }
   }
-  return { type, created, error, changeHandler, onRegister }
+
+  const onLogin = async () => {
+    try {
+      const response = await axios.post(import.meta.env.VITE_BASE_API + 'users/login/', {
+        email: form.email,
+        password: form.password1,
+      })
+      if (response.status === 200 && response.statusText === 'OK') {
+        localStorage.setItem('access_token', response.data.access_token)
+        localStorage.setItem('refresh_token', response.data.refresh_token)
+        navigate('/home')
+      }
+    } catch (error) {
+      let errors = []
+      for (let keys in error.response.data) {
+        errors.push(error.response.data[keys])
+      }
+      setError(errors)
+    }
+  }
+
+  return { form, type, created, error, changeHandler, onRegister, onLogin }
 }
 
 export default useHook
