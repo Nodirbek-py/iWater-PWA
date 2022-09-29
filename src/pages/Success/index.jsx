@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers'
@@ -9,7 +8,6 @@ import Button from '../../components/Button'
 
 const Success = () => {
   const { pathname } = useLocation()
-  console.log(pathname)
   return (
     <div className='flex flex-col justify-center items-center relative mx-auto w-5/6 mt-32 h-96'>
       {pathname !== '/success/install/' ? (

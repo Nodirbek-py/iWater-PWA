@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
 
@@ -10,32 +9,36 @@ import '../../index.css'
 import useHook from './hook'
 
 const Auth = () => {
-  const { type, created, error, changeHandler, onRegister } = useHook()
+  const { form, type, created, error, changeHandler, onRegister, onLogin } = useHook()
   return (
     <div className='flex justify-center flex-col mx-auto w-5/6'>
       {type === 'login' ? (
         <>
           <TextField
-            id='standard-basic'
-            label='Username'
-            name='username'
-            placeholder='Enter Your Email/Username'
+            id='standard-email'
+            label='Email'
+            name='email'
+            type='email'
+            placeholder='Enter Your Email'
             variant='standard'
             className='!mb-14'
+            value={form.email}
+            onChange={(e) => changeHandler(e)}
           />
           <TextField
-            id='standard-basic'
+            id='standard-password1'
             label='Password'
-            name='password'
+            name='password1'
+            type='password'
             placeholder='Enter Your Password'
             variant='standard'
             className='!mb-14'
+            value={form.password1}
+            onChange={(e) => changeHandler(e)}
           />
-          <Link exact to='/home' relative='/' className='mx-auto'>
-            <Button className='mb-9 w-28' title='LOGIN' type='red' />
-          </Link>
+          <Button onClick={onLogin} className='mb-9 w-auto mx-auto' title='LOGIN' type='red' />
           <Link exact to='/auth/register' className='mx-auto'>
-            <Button className='mb-20 w-28' title='REGISTER' type='blue' />
+            <Button className='mb-20 w-auto' title='REGISTER' type='blue' />
           </Link>
           <Typography
             style={{ fontWeight: 400 }}
@@ -52,6 +55,7 @@ const Auth = () => {
             type='text'
             variant='standard'
             className='!mb-14'
+            value={form.username}
             onChange={(e) => changeHandler(e)}
           />
           <TextField
@@ -62,6 +66,7 @@ const Auth = () => {
             type='email'
             variant='standard'
             className='!mb-14'
+            value={form.email}
             onChange={(e) => changeHandler(e)}
           />
           <TextField
@@ -72,6 +77,7 @@ const Auth = () => {
             type='password'
             variant='standard'
             className='!mb-14'
+            value={form.password1}
             onChange={(e) => changeHandler(e)}
           />
           <TextField
@@ -82,6 +88,7 @@ const Auth = () => {
             type='password'
             variant='standard'
             className='!mb-14'
+            value={form.password2}
             onChange={(e) => changeHandler(e)}
           />
           <Button onClick={onRegister} className='w-auto mx-auto' title='REGISTER' type='blue' />
