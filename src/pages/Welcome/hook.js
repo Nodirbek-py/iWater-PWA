@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
-import axios from 'axios'
+
+import getAccessToken from '../../handlers/getAccessToken'
 
 const useHook = () => {
   const [accessToken] = useState(localStorage.getItem('access_token'))
@@ -11,24 +12,13 @@ const useHook = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    async function getAccessToken() {
-      try {
-        const response = await axios.post(import.meta.env.VITE_BASE_API + 'users/token/refresh/', {
-          refresh: refreshToken,
-        })
-        localStorage.setItem('access_token', response.data.access)
-        setIsExpired(false)
-      } catch (error) {
-        throw new Error(error)
-      }
-    }
     if (!accessToken || !refreshToken) {
       navigate('/auth/login')
       setIsExpired(false)
     } else {
       if (jwtDecode(accessToken).exp * 1000 <= new Date().getTime()) {
         setIsExpired(true)
-        getAccessToken()
+        getAccessToken(refreshToken).then(() => setIsExpired(false))
       } else {
         setIsExpired(false)
         navigate('/home')
