@@ -1,83 +1,166 @@
 import TextField from '@mui/material/TextField'
-import { Link } from 'react-router-dom'
+import InputAdornment from '@mui/material/InputAdornment'
+import CircularProgress from '@mui/material/CircularProgress'
+import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import moment from 'moment'
 
 import Typography from '../../components/Typography'
 import Button from '../../components/Button'
 import Alert from '../../components/Alert'
+import useHook from './hook'
 
 const Report = () => {
+  const { device, changeHandler, loading, form, setForm, sendReport, tab, setTab, turnOff } =
+    useHook()
   return (
     <div className='flex flex-col justify-center relative mx-auto w-5/6'>
-      <Typography
-        type='error'
-        text='REPORT A DEVICE ISSUE / COMPLAINT'
-        style={{ marginBottom: 30 }}
-      />
-      <TextField
-        id='standard-basic'
-        label='Serial Number'
-        value='S1019290'
-        variant='standard'
-        className='!mb-6'
-      />
-      <TextField
-        id='standard-basic'
-        label='Room Number'
-        value='1612'
-        variant='standard'
-        className='!mb-6'
-      />
-      <TextField
-        id='standard-basic'
-        label='Total Shower Count'
-        value='370'
-        variant='standard'
-        className='!mb-6'
-      />
-      <TextField
-        id='standard-basic'
-        label='Total Water Saved'
-        value='100L'
-        variant='standard'
-        className='!mb-6'
-      />
-      <div className='bg-red-200 px-5 py-6 mb-4'>
-        <TextField
-          id='standard-basic'
-          label='Enter Date of Issue'
-          value="Enter Today's date"
-          variant='standard'
-          className='!mb-6 w-full'
-        />
-        <TextField
-          id='standard-basic'
-          label='Description of Complaint/Issue'
-          value='Add a description in detail of the issue or complaint in this space provided. We thank you
-          for helping us improve!'
-          variant='standard'
-          className='w-full'
-          rows={3}
-          maxRows={5}
-          multiline
-        />
-      </div>
-      <div className='flex flex-wrap'>
-        <Link to='/turnoff/24' className='block mx-auto'>
-          <Button title='TURN OFF' type='red' className='w-auto mx-auto mb-4' />
-        </Link>
-        <Link to='/success' className='block mx-auto'>
-          <Button title='REPORT ONLY' type='red' className='w-auto mx-auto mb-4' />
-        </Link>
-        <Link to='/uninstall/24' className='block mx-auto'>
-          <Button title='UNINSTALL' type='red' className='w-auto mx-auto mb-4' />
-        </Link>
-      </div>
-      <Alert
-        className='mb-5'
-        title='ATTENTION'
-        body='Turning off the device will keep it in high flow mode but the device
+      {tab !== 'report' && (
+        <p className='absolute -top-24 -left-14 cursor-pointer' onClick={() => setTab('report')}>
+          BACK
+        </p>
+      )}
+      {loading ? (
+        <CircularProgress className='mx-auto' />
+      ) : tab === 'report' || tab === 'uninstall' ? (
+        <>
+          <Typography
+            type='error'
+            text={tab === 'report' ? 'REPORT A DEVICE ISSUE / COMPLAINT' : 'UNINSTALL A DEVICE'}
+            style={{ marginBottom: 30 }}
+          />
+          <TextField
+            id='standard-serial-number'
+            label='Serial Number'
+            value={device.serial_num}
+            variant='standard'
+            className='!mb-6'
+          />
+          <TextField
+            id='standard-room-number'
+            label='Room Number'
+            value={device.room_num}
+            variant='standard'
+            className='!mb-6'
+          />
+          <TextField
+            id='standard-shower-count'
+            label='Total Shower Count'
+            value={form.showerCount}
+            variant='standard'
+            className='!mb-6'
+            name='showerCount'
+            onChange={(e) => changeHandler(e)}
+          />
+          <TextField
+            id='standard-water-saved'
+            label='Total Water Saved'
+            value={form.waterSaved}
+            InputProps={{
+              endAdornment: <InputAdornment position='end'>L</InputAdornment>,
+            }}
+            variant='standard'
+            className='!mb-6'
+            name='waterSaved'
+            onChange={(e) => changeHandler(e)}
+          />
+          <div className='bg-red-200 px-5 py-6 mb-4'>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <MobileDatePicker
+                label='Enter Date of Issue'
+                inputFormat='MM/DD/YYYY'
+                className='!mb-6 w-full'
+                renderInput={(params) => (
+                  <TextField {...params} variant='standard' className='!mb-6 w-full' />
+                )}
+                name='dateOfIssue'
+                value={form.dateOfIssue}
+                onChange={(e) => {
+                  setForm({ ...form, dateOfIssue: moment(e.$d, 'YYYY-MM-DDTHH:mm').format() })
+                }}
+              />
+            </LocalizationProvider>
+            <TextField
+              id='standard-description'
+              label='Description of Complaint/Issue'
+              value={form.description}
+              variant='standard'
+              className='w-full'
+              minRows={3}
+              maxRows={5}
+              multiline
+              name='description'
+              onChange={(e) => changeHandler(e)}
+            />
+          </div>
+          <div className='flex flex-wrap'>
+            {tab === 'report' ? (
+              <>
+                <Button
+                  title='TURN OFF'
+                  type='red'
+                  className='w-auto mx-auto mb-4'
+                  onClick={() => setTab('turnOff')}
+                />
+                <Button
+                  title='REPORT ONLY'
+                  onClick={sendReport}
+                  type='red'
+                  className='w-auto mx-auto mb-4'
+                />
+                <Button
+                  title='UNINSTALL'
+                  type='red'
+                  className='w-auto mx-auto mb-4'
+                  onClick={() => setTab('uninstall')}
+                />
+              </>
+            ) : (
+              <Button
+                title='DEACTIVATE'
+                onClick={sendReport}
+                type='red'
+                className='w-auto mx-auto mb-4'
+              />
+            )}
+          </div>
+          <Alert
+            className='mb-5'
+            title='ATTENTION'
+            body='Turning off the device will keep it in high flow mode but the device
 will continue to collect shower data. '
-      />
+          />
+        </>
+      ) : (
+        <>
+          <Alert
+            color='rgba(249, 13, 13, 0.6)'
+            title='Device Successfully Turned Off'
+            body='The device is now turned off and will stay in high flow mode. Turn it on soon to save more water. Device will continue to collect shower data while being turned off.'
+          />
+          <div className='bg-red-200 px-5 py-6 my-8'>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <MobileDatePicker
+                label='Turn On Date'
+                inputFormat='MM/DD/YYYY'
+                renderInput={(params) => (
+                  <TextField {...params} variant='standard' className='w-10/12' />
+                )}
+                name='turnOnDate'
+                value={form.turnOnDate}
+                onChange={(e) => {
+                  setForm({ ...form, turnOnDate: moment(e.$d, 'YYYY-MM-DDTHH:mm').format() })
+                }}
+              />
+            </LocalizationProvider>
+          </div>
+          <Alert
+            title='Device On Date'
+            body='The device will automatically turn on to save water on the date entered above.'
+          />
+          <Button title='CONFIRM' type='red' className='mt-16 w-auto' onClick={turnOff} />
+        </>
+      )}
     </div>
   )
 }
