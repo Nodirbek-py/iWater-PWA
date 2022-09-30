@@ -5,7 +5,7 @@ export const SuggestionWrapper = styled.ul`
   top: 55px;
   left: 0;
   width: 100%;
-  height: 150px;
+  max-height: 150px;
   display: flex;
   flex-direction: column;
   padding: 5px 0;

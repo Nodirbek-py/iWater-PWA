@@ -1,14 +1,12 @@
 import './App.css'
-import { Outlet, useLocation } from 'react-router-dom'
-
-import Navbar from './components/Navbar'
+import Welcome from './pages/Welcome'
 
 function App() {
-  const { pathname } = useLocation()
   return (
     <div className='App'>
-      {(pathname !== '/welcome' || pathname !== '/welcome/') && <Navbar />}
-      <Outlet />
+    
+      <Welcome />
+      
     </div>
   )
 }
