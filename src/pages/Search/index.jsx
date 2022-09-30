@@ -1,13 +1,13 @@
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useHref } from 'react-router-dom'
 
 import Button from '../../components/Button'
 import Alert from '../../components/Alert'
 import useHook from './hook'
 
 const Search = () => {
-  const { pathname } = useLocation()
+  const location = useHref()
   const { devices, setInput, input } = useHook()
   return (
     <div className='flex flex-col justify-center relative mx-auto w-5/6'>
@@ -29,12 +29,8 @@ const Search = () => {
           />
         )}
       />
-      <Link to={pathname !== '/install/' ? `/report/${input}` : '/install/24'} className='mx-auto'>
-        <Button
-          className='w-28 mx-auto'
-          type='red'
-          title='Search'
-        />
+      <Link relative='route' to={`${location}/${input}`} className='mx-auto'>
+        <Button className='w-28 mx-auto' type='red' title='Search' />
       </Link>
       <Alert
         className='mt-24'
