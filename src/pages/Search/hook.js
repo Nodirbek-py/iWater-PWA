@@ -14,7 +14,6 @@ const useHook = () => {
           },
         })
         if (response.status === 200 && response.statusText === 'OK') {
-          console.log(response.data)
           setDevices(
             response.data.map((data) => {
               return { ...data, label: data.serial_num }

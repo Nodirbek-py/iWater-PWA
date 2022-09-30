@@ -34,7 +34,6 @@ const Search = () => {
           className='w-28 mx-auto'
           type='red'
           title='Search'
-          onClick={() => console.log(input)}
         />
       </Link>
       <Alert
