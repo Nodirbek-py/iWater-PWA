@@ -26,3 +26,7 @@ dist-ssr
 # Environment variables
 
 .env
+
+# API documentation
+
+collection.json
