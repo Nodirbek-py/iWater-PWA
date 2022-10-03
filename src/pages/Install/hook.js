@@ -21,7 +21,7 @@ const useHook = () => {
   useEffect(() => {
     async function getSerialNumbers() {
       try {
-        const response = await axios.get(import.meta.env.VITE_BASE_API + 'install/', {
+        const response = await axios.get(import.meta.env.VITE_BASE_API + 'install', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
           },
@@ -48,7 +48,7 @@ const useHook = () => {
     /* eslint-enable */
 
     try {
-      const response = await axios.post(import.meta.env.VITE_BASE_API + 'install/', data, {
+      const response = await axios.post(import.meta.env.VITE_BASE_API + 'install', data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },

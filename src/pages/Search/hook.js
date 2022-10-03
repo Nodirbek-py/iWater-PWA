@@ -8,7 +8,7 @@ const useHook = () => {
   useEffect(() => {
     async function getSerialNumbers() {
       try {
-        const response = await axios.get(import.meta.env.VITE_BASE_API + 'report/', {
+        const response = await axios.get(import.meta.env.VITE_BASE_API + 'report', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
           },

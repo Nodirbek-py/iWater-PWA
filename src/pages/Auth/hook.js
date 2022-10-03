@@ -34,7 +34,7 @@ const useHook = () => {
 
   const onRegister = async () => {
     try {
-      const response = await axios.post(import.meta.env.VITE_BASE_API + 'users/register/', form)
+      const response = await axios.post(import.meta.env.VITE_BASE_API + 'users/register', form)
       if (response.status === 201 && response.statusText === 'Created') setCreated(true)
     } catch (error) {
       let errors = []
@@ -47,7 +47,7 @@ const useHook = () => {
 
   const onLogin = async () => {
     try {
-      const response = await axios.post(import.meta.env.VITE_BASE_API + 'users/login/', {
+      const response = await axios.post(import.meta.env.VITE_BASE_API + 'users/login', {
         email: form.email,
         password: form.password1,
       })

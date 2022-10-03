@@ -26,7 +26,7 @@ const useHook = () => {
   useEffect(() => {
     async function getSerialNumbers() {
       try {
-        const response = await axios.get(import.meta.env.VITE_BASE_API + 'report/', {
+        const response = await axios.get(import.meta.env.VITE_BASE_API + 'report', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
           },
@@ -54,7 +54,7 @@ const useHook = () => {
     }
     /* eslint-enable */
     try {
-      const response = await axios.post(import.meta.env.VITE_BASE_API + 'report/', data, {
+      const response = await axios.post(import.meta.env.VITE_BASE_API + 'report', data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
@@ -76,7 +76,7 @@ const useHook = () => {
     }
     /* eslint-enable */
     try {
-      const response = await axios.post(import.meta.env.VITE_BASE_API + 'device/on_off/', data, {
+      const response = await axios.post(import.meta.env.VITE_BASE_API + 'device/on_off', data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
