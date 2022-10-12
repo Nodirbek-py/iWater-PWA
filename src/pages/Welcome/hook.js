@@ -18,7 +18,15 @@ const useHook = () => {
     } else {
       if (jwtDecode(accessToken).exp * 1000 <= new Date().getTime()) {
         setIsExpired(true)
-        getAccessToken(refreshToken).then(() => setIsExpired(false))
+        getAccessToken(refreshToken).then((res) => {
+          if (res.response.status === 201 || res.response.status === 200) {
+            setIsExpired(false)
+            navigate('/home')
+          } else {
+            setIsExpired(false)
+            navigate('/auth/login')
+          }
+        })
       } else {
         setIsExpired(false)
         navigate('/home')

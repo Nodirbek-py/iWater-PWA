@@ -11,8 +11,12 @@ function isAuthenticated() {
   } else {
     let isExpired = jwtDecode(accessToken).exp * 1000 <= new Date().getTime()
     if (isExpired) {
-      getAccessToken().then(() => {
-        return true
+      getAccessToken(refreshToken).then((res) => {
+        if (res.response.status === 201 || res.response.status === 200) {
+          return false
+        } else {
+          return false
+        }
       })
     } else {
       return true

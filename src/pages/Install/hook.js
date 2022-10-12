@@ -53,7 +53,6 @@ const useHook = () => {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       })
-      console.log(response)
       if (response.status === 201 && response.statusText === 'Created') setTab('step3')
     } catch (error) {
       throw new Error(error)

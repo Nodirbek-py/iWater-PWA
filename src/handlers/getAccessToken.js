@@ -6,8 +6,8 @@ async function getAccessToken(refreshToken) {
       refresh: refreshToken,
     })
     localStorage.setItem('access_token', response.data.access)
-  } catch (error) {
-    throw new Error(error)
+  } catch (err) {
+    return err
   }
 }
 
