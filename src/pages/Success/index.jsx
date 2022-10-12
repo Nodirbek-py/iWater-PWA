@@ -10,14 +10,7 @@ const Success = () => {
   const { pathname } = useLocation()
   return (
     <div className='flex flex-col justify-center items-center relative mx-auto w-5/6 mt-32 h-96'>
-      {pathname !== '/success/install/' ? (
-        <>
-          <Typography text='SUCCESS' type='error' style={{ marginBottom: 140 }} />
-          <Link to='/welcome'>
-            <Button title='HOME' type='red' />
-          </Link>
-        </>
-      ) : (
+      {pathname === '/success/install/' ? (
         <>
           <Typography
             text='THE INFORMATION 
@@ -51,6 +44,13 @@ WAS UPDATED SUCCESSFULLY!'
           </LocalizationProvider>
           <Link to='/home' className='mx-auto !mt-28'>
             <Button title='GO TO HOME' type='blue' className='bg-blueCyan w-auto' />
+          </Link>
+        </>
+      ) : (
+        <>
+          <Typography text='SUCCESS' type='error' style={{ marginBottom: 140 }} />
+          <Link to='/welcome'>
+            <Button title='HOME' type='red' />
           </Link>
         </>
       )}

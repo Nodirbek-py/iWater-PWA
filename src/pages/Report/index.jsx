@@ -11,8 +11,18 @@ import Alert from '../../components/Alert'
 import useHook from './hook'
 
 const Report = () => {
-  const { device, changeHandler, loading, form, setForm, sendReport, tab, setTab, turnOff } =
-    useHook()
+  const {
+    device,
+    changeHandler,
+    loading,
+    form,
+    setForm,
+    sendReport,
+    deactivate,
+    tab,
+    setTab,
+    turnOff,
+  } = useHook()
   return (
     <div className='flex flex-col justify-center relative mx-auto w-5/6'>
       {tab !== 'report' && (
@@ -118,7 +128,7 @@ const Report = () => {
             ) : (
               <Button
                 title='DEACTIVATE'
-                onClick={sendReport}
+                onClick={deactivate}
                 type='red'
                 className='w-auto mx-auto mb-4'
               />

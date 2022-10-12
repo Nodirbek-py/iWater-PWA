@@ -87,9 +87,43 @@ const useHook = () => {
     }
   }
 
-  
+  const deactivate = async () => {
+    /* eslint-disable */
+    let data = {
+      user: jwtDecode(localStorage.getItem('access_token')).user_id,
+      serial_num: device.serial_num,
+      room_num: device.room_num,
+      is_device_installed: 0,
+    }
+    /* eslint-enable */
+    try {
+      const response = await axios.post(
+        import.meta.env.VITE_BASE_API + 'is_device/installed/',
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        },
+      )
+      if (response.status === 201 && response.statusText === 'Created') navigate('/success')
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
 
-  return { loading, device, changeHandler, form, setForm, sendReport, tab, setTab, turnOff }
+  return {
+    loading,
+    device,
+    changeHandler,
+    form,
+    setForm,
+    sendReport,
+    tab,
+    setTab,
+    turnOff,
+    deactivate,
+  }
 }
 
 export default useHook
