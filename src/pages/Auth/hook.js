@@ -95,20 +95,25 @@ const useHook = () => {
     }
   }
 
-  const onLogin = async () => {
-    try {
-      const response = await axios.post(import.meta.env.VITE_BASE_API + 'users/login/', {
+  const onLogin = () => {
+    axios
+      .post(import.meta.env.VITE_BASE_API + 'users/login/', {
         username: form.username,
         password: form.password,
       })
-      if (response.status === 200 && response.statusText === 'OK') {
-        localStorage.setItem('access_token', response.data.access_token)
-        localStorage.setItem('refresh_token', response.data.refresh_token)
-        navigate('/home')
-      }
-    } catch (error) {
-      setError(error.response.data)
-    }
+      .then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+          navigate('/home')
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 400) {
+          setError(err.response.data)
+        } else {
+          setError({ detail: err.response.data.detail })
+        }
+      })
   }
 
   return { form, type, created, error, changeHandler, onRegister, onLogin }

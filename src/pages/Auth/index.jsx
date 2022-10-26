@@ -39,6 +39,11 @@ const Auth = () => {
             helperText={error.password}
             error={error.password}
           />
+          <Typography
+            text={error.detail}
+            type='error'
+            style={{ marginBottom: 15, textAlign: 'center' }}
+          />
           <Button onClick={onLogin} className='mb-9 w-auto mx-auto' title='LOGIN' type='red' />
           <Link exact to='/auth/register' className='mx-auto'>
             <Button className='mb-20 w-auto' title='REGISTER' type='blue' />
