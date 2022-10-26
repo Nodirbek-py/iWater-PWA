@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField'
 
 import Button from '../../components/Button'
 import Typography from '../../components/Typography'
-import Errors from '../../components/Errors'
 import Popup from '../../components/Popup'
 import '../../index.css'
 import useHook from './hook'
@@ -15,26 +14,30 @@ const Auth = () => {
       {type === 'login' ? (
         <>
           <TextField
-            id='standard-email'
-            label='Email'
-            name='email'
-            type='email'
-            placeholder='Enter Your Email'
+            id='standard-username'
+            label='Username'
+            name='username'
+            type='text'
+            placeholder='Enter Your Username'
             variant='standard'
             className='!mb-14'
-            value={form.email}
+            value={form.username}
             onChange={(e) => changeHandler(e)}
+            helperText={error.username}
+            error={error.username}
           />
           <TextField
             id='standard-password1'
             label='Password'
-            name='password1'
+            name='password'
             type='password'
             placeholder='Enter Your Password'
             variant='standard'
             className='!mb-14'
-            value={form.password1}
+            value={form.password}
             onChange={(e) => changeHandler(e)}
+            helperText={error.password}
+            error={error.password}
           />
           <Button onClick={onLogin} className='mb-9 w-auto mx-auto' title='LOGIN' type='red' />
           <Link exact to='/auth/register' className='mx-auto'>
@@ -48,6 +51,32 @@ const Auth = () => {
       ) : (
         <>
           <TextField
+            id='standard-firstname'
+            name='first_name'
+            label='Firstname'
+            placeholder='Enter Your Firstname'
+            type='text'
+            variant='standard'
+            className='!mb-14'
+            value={form.first_name}
+            onChange={(e) => changeHandler(e)}
+            helperText={error.first_name}
+            error={error.first_name}
+          />
+          <TextField
+            id='standard-lastname'
+            name='last_name'
+            label='Lastname'
+            placeholder='Enter Your Lastname'
+            type='text'
+            variant='standard'
+            className='!mb-14'
+            value={form.last_name}
+            onChange={(e) => changeHandler(e)}
+            helperText={error.last_name}
+            error={error.last_name}
+          />
+          <TextField
             id='standard-username'
             name='username'
             label='Username'
@@ -57,6 +86,8 @@ const Auth = () => {
             className='!mb-14'
             value={form.username}
             onChange={(e) => changeHandler(e)}
+            helperText={error.username}
+            error={error.username}
           />
           <TextField
             id='standard-email'
@@ -68,17 +99,21 @@ const Auth = () => {
             className='!mb-14'
             value={form.email}
             onChange={(e) => changeHandler(e)}
+            helperText={error.email}
+            error={error.email}
           />
           <TextField
-            id='standard-password1'
-            name='password1'
+            id='standard-password'
+            name='password'
             label='Password'
             placeholder='Enter Your Password'
             type='password'
             variant='standard'
             className='!mb-14'
-            value={form.password1}
+            value={form.password}
             onChange={(e) => changeHandler(e)}
+            helperText={error.password}
+            error={error.password}
           />
           <TextField
             id='standard-password2'
@@ -90,11 +125,12 @@ const Auth = () => {
             className='!mb-14'
             value={form.password2}
             onChange={(e) => changeHandler(e)}
+            helperText={error.password2}
+            error={error.password2}
           />
           <Button onClick={onRegister} className='w-auto mx-auto' title='REGISTER' type='blue' />
         </>
       )}
-      <Errors errors={error} />
       {created && (
         <Popup>
           <div className='flex flex-col justify-center items-center'>
