@@ -8,18 +8,22 @@ function isAuthenticated() {
 
   if (!accessToken || !refreshToken) {
     return false
+  } else if (jwtDecode(accessToken).exp * 1000 > new Date().getTime()) {
+    return true
   } else {
-    let isExpired = jwtDecode(accessToken).exp * 1000 <= new Date().getTime()
-    if (isExpired) {
+    if (
+      jwtDecode(refreshToken).exp * 1000 > new Date().getTime() &&
+      jwtDecode(accessToken).exp * 1000 <= new Date().getTime()
+    ) {
       getAccessToken(refreshToken).then((res) => {
         if (res.response.status === 201 || res.response.status === 200) {
-          return false
+          return true
         } else {
           return false
         }
       })
     } else {
-      return true
+      return false
     }
   }
 }
