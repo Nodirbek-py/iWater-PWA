@@ -6,7 +6,7 @@ import isAuthenticated from '../../handlers/isAuthenticated'
 const useHook = () => {
   const navigate = useNavigate()
   useEffect(() => {
-    if (!isAuthenticated) navigate('/auth/login')
+    if (!isAuthenticated()) navigate('/auth/login')
   }, [])
 }
 

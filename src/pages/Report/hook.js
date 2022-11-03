@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
@@ -14,7 +14,6 @@ const useHook = () => {
     dateOfIssue: '',
     turnOnDate: '',
   })
-  const { id } = useParams()
   const navigate = useNavigate()
 
   const changeHandler = (e) => {
@@ -24,31 +23,19 @@ const useHook = () => {
   }
 
   useEffect(() => {
-    async function getSerialNumbers() {
-      try {
-        const response = await axios.get(import.meta.env.VITE_BASE_API + 'report/', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        })
-        if (response.status === 200 && response.statusText === 'OK') {
-          setDevice(response.data.find((device) => device.serial_num === id))
-        }
-      } catch (error) {
-        throw new Error(error)
-      }
-    }
-    getSerialNumbers().then(() => setLoading(false))
+    let device = JSON.parse(localStorage.getItem('device'))
+    setDevice(device)
+    setLoading(false)
   }, [])
 
   const sendReport = async () => {
     /* eslint-disable */
     let data = {
       user: jwtDecode(localStorage.getItem('access_token')).user_id,
-      serial_num: device.serial_num,
-      room_num: device.room_num,
+      serial_num: device.SerialNumber,
+      room_num: device.Room_No,
       total_shower_count: Number(form.showerCount),
-      total_water_saved: form.waterSaved + 'L',
+      total_water_saved: Number(form.waterSaved),
       date_of_issue: form.dateOfIssue,
       complaint_description: form.description,
     }
@@ -69,8 +56,8 @@ const useHook = () => {
     /* eslint-disable */
     let data = {
       user: jwtDecode(localStorage.getItem('access_token')).user_id,
-      serial_num: device.serial_num,
-      room_num: device.room_num,
+      SerialNumber: device.SerialNumber,
+      Room_No: device.Room_No,
       off_on: 1,
       turn_on_date: form.turnOnDate,
     }
@@ -91,8 +78,8 @@ const useHook = () => {
     /* eslint-disable */
     let data = {
       user: jwtDecode(localStorage.getItem('access_token')).user_id,
-      serial_num: device.serial_num,
-      room_num: device.room_num,
+      SerialNumber: device.SerialNumber,
+      Room_no: device.Room_No,
       is_device_installed: 0,
     }
     /* eslint-enable */

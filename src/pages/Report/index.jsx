@@ -42,14 +42,14 @@ const Report = () => {
           <TextField
             id='standard-serial-number'
             label='Serial Number'
-            value={device.serial_num}
+            value={device.SerialNumber}
             variant='standard'
             className='!mb-6'
           />
           <TextField
             id='standard-room-number'
             label='Room Number'
-            value={device.room_num}
+            value={device.Room_No}
             variant='standard'
             className='!mb-6'
           />
@@ -86,7 +86,7 @@ const Report = () => {
                 name='dateOfIssue'
                 value={form.dateOfIssue}
                 onChange={(e) => {
-                  setForm({ ...form, dateOfIssue: moment(e.$d, 'YYYY-MM-DDTHH:mm').format() })
+                  setForm({ ...form, dateOfIssue: moment(e.$d).format('YYYY-MM-DDTHH:mm') })
                 }}
               />
             </LocalizationProvider>
@@ -159,7 +159,7 @@ will continue to collect shower data. '
                 name='turnOnDate'
                 value={form.turnOnDate}
                 onChange={(e) => {
-                  setForm({ ...form, turnOnDate: moment(e.$d, 'YYYY-MM-DDTHH:mm').format() })
+                  setForm({ ...form, turnOnDate: moment(e.$d).format('YYYY-MM-DDTHH:mm') })
                 }}
               />
             </LocalizationProvider>
