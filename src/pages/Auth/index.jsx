@@ -138,8 +138,11 @@ const Auth = () => {
             className='!mb-14'
             {...register('password', { required: 'This field may not be blank' })}
             value={watch('password')}
-            helperText={errors.password?.type === 'required' && errors.password?.message}
-            error={errors.password?.type === 'required'}
+            helperText={
+              (errors.password?.type === 'required' && errors.first_name?.message) ||
+              error.password[0]
+            }
+            error={errors.password?.type === 'required' || error.password[0]}
           />
           <TextField
             id='standard-password2'
@@ -151,8 +154,11 @@ const Auth = () => {
             className='!mb-14'
             {...register('password2', { required: 'This field may not be blank' })}
             value={watch('password2')}
-            helperText={errors.password?.type === 'required' && errors.first_name?.message}
-            error={errors.password?.type === 'required'}
+            helperText={
+              (errors.password?.type === 'required' && errors.first_name?.message) ||
+              error.password[0]
+            }
+            error={errors.password?.type === 'required' || error.password[0]}
           />
           <Button
             onClick={handleSubmit(onSubmitRegister)}
@@ -166,12 +172,12 @@ const Auth = () => {
         <Popup>
           <div className='flex flex-col justify-center items-center'>
             <Typography
-              text='User is created! Please sign in to use our services'
+              text='User is created! Please choose your hotel'
               type='blue'
               style={{ textAlign: 'center', marginBottom: 10 }}
             />
-            <Link to='/auth/login'>
-              <Button title='Login' type='blue' />
+            <Link to='/hotel'>
+              <Button title='Choose Hotel' type='blue' />
             </Link>
           </div>
         </Popup>

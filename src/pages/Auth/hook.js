@@ -28,6 +28,8 @@ const useHook = () => {
     axios
       .post(import.meta.env.VITE_BASE_API + 'users/login/', data)
       .then((res) => {
+        localStorage.setItem('access_token', res.data.access)
+        localStorage.setItem('refresh_token', res.data.refresh)
         if (res.status === 200) {
           navigate('/home')
         }
