@@ -16,15 +16,15 @@ const useHook = () => {
       navigate('/auth/login')
       setIsExpired(false)
     } else if (
-      jwtDecode(accessToken).exp * 1000 < new Date().getTime() &&
-      jwtDecode(refreshToken).exp * 1000 < new Date().getTime()
+      jwtDecode(accessToken).exp * 1000 > new Date().getTime() &&
+      jwtDecode(refreshToken).exp * 1000 > new Date().getTime()
     ) {
       setIsExpired(false)
       navigate('/home')
     } else {
       if (
-        jwtDecode(refreshToken).exp * 1000 < new Date().getTime() &&
-        jwtDecode(accessToken).exp * 1000 >= new Date().getTime()
+        jwtDecode(refreshToken).exp * 1000 > new Date().getTime() &&
+        jwtDecode(accessToken).exp * 1000 <= new Date().getTime()
       ) {
         setIsExpired(true)
         getAccessToken(refreshToken).then((res) => {
@@ -36,7 +36,7 @@ const useHook = () => {
             navigate('/auth/login')
           }
         })
-      } else if (jwtDecode(refreshToken).exp * 1000 >= new Date().getTime()) {
+      } else if (jwtDecode(refreshToken).exp * 1000 <= new Date().getTime()) {
         setIsExpired(false)
         navigate('/auth/login')
       }

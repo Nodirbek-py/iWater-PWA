@@ -1,9 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import App from './App'
+import AddHotel from './pages/AddHotel'
 import NotFound from './pages/NotFound'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
+import Hotel from './pages/Hotel'
 import Install from './pages/Install'
 import Search from './pages/Search'
 import Success from './pages/Success'
@@ -51,6 +53,14 @@ const router = createBrowserRouter([
       {
         path: '/success/install',
         element: <Success />,
+      },
+      {
+        path: '/hotel',
+        element: <Hotel />,
+      },
+      {
+        path: '/addhotel',
+        element: <AddHotel />,
       },
     ],
   },
