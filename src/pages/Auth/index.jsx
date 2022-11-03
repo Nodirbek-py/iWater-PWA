@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
+import { useForm } from 'react-hook-form'
 
 import Button from '../../components/Button'
 import Typography from '../../components/Typography'
@@ -8,11 +9,19 @@ import '../../index.css'
 import useHook from './hook'
 
 const Auth = () => {
-  const { form, type, created, error, changeHandler, onRegister, onLogin } = useHook()
+  const { error, type, created, onRegister, onLogin } = useHook()
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
+  const onSubmitLogin = (data) => onLogin(data)
+  const onSubmitRegister = (data) => onRegister(data)
   return (
-    <div className='flex justify-center flex-col mx-auto w-5/6'>
+    <div className='mx-auto w-5/6'>
       {type === 'login' ? (
-        <>
+        <form className='flex justify-center flex-col mx-auto w-full'>
           <TextField
             id='standard-username'
             label='Username'
@@ -21,10 +30,10 @@ const Auth = () => {
             placeholder='Enter Your Username'
             variant='standard'
             className='!mb-14'
-            value={form.username}
-            onChange={(e) => changeHandler(e)}
-            helperText={error.username}
-            error={error.username}
+            {...register('username', { required: 'This field may not be blank' })}
+            value={watch('username')}
+            helperText={errors.username?.type === 'required' && errors.username?.message}
+            error={errors.username?.type === 'required'}
           />
           <TextField
             id='standard-password1'
@@ -34,17 +43,22 @@ const Auth = () => {
             placeholder='Enter Your Password'
             variant='standard'
             className='!mb-14'
-            value={form.password}
-            onChange={(e) => changeHandler(e)}
-            helperText={error.password}
-            error={error.password}
+            {...register('password', { required: 'This field may not be blank' })}
+            value={watch('password')}
+            helperText={errors.password?.type === 'required' && errors.password?.message}
+            error={errors.password?.type === 'required'}
           />
           <Typography
             text={error.detail}
             type='error'
             style={{ marginBottom: 15, textAlign: 'center' }}
           />
-          <Button onClick={onLogin} className='mb-9 w-auto mx-auto' title='LOGIN' type='red' />
+          <Button
+            onClick={handleSubmit(onSubmitLogin)}
+            className='mb-9 w-auto mx-auto'
+            title='LOGIN'
+            type='red'
+          />
           <Link exact to='/auth/register' className='mx-auto'>
             <Button className='mb-20 w-auto' title='REGISTER' type='blue' />
           </Link>
@@ -52,9 +66,9 @@ const Auth = () => {
             style={{ fontWeight: 400 }}
             text='Is this your first time to login? Register first.'
           />
-        </>
+        </form>
       ) : (
-        <>
+        <form className='flex justify-center flex-col mx-auto w-full'>
           <TextField
             id='standard-firstname'
             name='first_name'
@@ -63,10 +77,10 @@ const Auth = () => {
             type='text'
             variant='standard'
             className='!mb-14'
-            value={form.first_name}
-            onChange={(e) => changeHandler(e)}
-            helperText={error.first_name}
-            error={error.first_name}
+            {...register('first_name', { required: 'This field may not be blank' })}
+            value={watch('first_name')}
+            helperText={errors.first_name?.type === 'required' && errors.first_name?.message}
+            error={errors.first_name?.type === 'required'}
           />
           <TextField
             id='standard-lastname'
@@ -76,10 +90,10 @@ const Auth = () => {
             type='text'
             variant='standard'
             className='!mb-14'
-            value={form.last_name}
-            onChange={(e) => changeHandler(e)}
-            helperText={error.last_name}
-            error={error.last_name}
+            {...register('last_name', { required: 'This field may not be blank' })}
+            value={watch('last_name')}
+            helperText={errors.last_name?.type === 'required' && errors.last_name?.message}
+            error={errors.last_name?.type === 'required'}
           />
           <TextField
             id='standard-username'
@@ -89,10 +103,10 @@ const Auth = () => {
             type='text'
             variant='standard'
             className='!mb-14'
-            value={form.username}
-            onChange={(e) => changeHandler(e)}
-            helperText={error.username}
-            error={error.username}
+            {...register('username', { required: 'This field may not be blank' })}
+            value={watch('username')}
+            helperText={errors.username?.type === 'required' && errors.username?.message}
+            error={errors.username?.type === 'required'}
           />
           <TextField
             id='standard-email'
@@ -102,11 +116,18 @@ const Auth = () => {
             type='email'
             variant='standard'
             className='!mb-14'
-            value={form.email}
-            onChange={(e) => changeHandler(e)}
-            helperText={error.email}
-            error={error.email}
+            {...register('email', {
+              required: 'This field may not be blank',
+              pattern: {
+                value: /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/,
+                message: 'Email is not valid',
+              },
+            })}
+            value={watch('email')}
+            helperText={errors.email && errors.email?.message}
+            error={errors.email}
           />
+          {errors.mail?.message}
           <TextField
             id='standard-password'
             name='password'
@@ -115,10 +136,10 @@ const Auth = () => {
             type='password'
             variant='standard'
             className='!mb-14'
-            value={form.password}
-            onChange={(e) => changeHandler(e)}
-            helperText={error.password}
-            error={error.password}
+            {...register('password', { required: 'This field may not be blank' })}
+            value={watch('password')}
+            helperText={errors.password?.type === 'required' && errors.password?.message}
+            error={errors.password?.type === 'required'}
           />
           <TextField
             id='standard-password2'
@@ -128,13 +149,18 @@ const Auth = () => {
             type='password'
             variant='standard'
             className='!mb-14'
-            value={form.password2}
-            onChange={(e) => changeHandler(e)}
-            helperText={error.password2}
-            error={error.password2}
+            {...register('password2', { required: 'This field may not be blank' })}
+            value={watch('password2')}
+            helperText={errors.password?.type === 'required' && errors.first_name?.message}
+            error={errors.password?.type === 'required'}
           />
-          <Button onClick={onRegister} className='w-auto mx-auto' title='REGISTER' type='blue' />
-        </>
+          <Button
+            onClick={handleSubmit(onSubmitRegister)}
+            className='w-auto mx-auto'
+            title='REGISTER'
+            type='blue'
+          />
+        </form>
       )}
       {created && (
         <Popup>

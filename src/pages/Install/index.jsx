@@ -28,14 +28,14 @@ const Install = () => {
               <TextField
                 id='standard-serial-number'
                 label='Serial Number'
-                value={device.serial_num}
+                value={device && device.SerialNumber}
                 variant='standard'
                 className='!mb-6'
               />
               <TextField
                 id='standard-room-number'
                 label='Room Number'
-                value={device.room_num}
+                value={device.Room_No || form.roomNumber}
                 variant='standard'
                 className='!mb-6'
               />
@@ -58,7 +58,7 @@ const Install = () => {
               <TextField
                 id='standard-basic'
                 label='Serial Number'
-                value={device.serial_num}
+                value={device.SerialNumber}
                 variant='standard'
                 className='!mb-6 !w-10/12 !mx-auto'
               />
@@ -67,7 +67,7 @@ const Install = () => {
                   id='standard-basic'
                   label='Room Number'
                   placeholder='Enter a Room Number'
-                  value={device.room_num || form.roomNumber}
+                  value={device.Room_No || form.roomNumber}
                   variant='standard'
                   className='!mb-12'
                   name='roomNumber'
@@ -83,7 +83,7 @@ const Install = () => {
                     name='dateOfIssue'
                     value={form.installDate}
                     onChange={(e) => {
-                      setForm({ ...form, installDate: moment(e.$d, 'YYYY-MM-DDTHH:mm').format() })
+                      setForm({ ...form, installDate: moment(e.$d).format('YYYY-MM-DD HH:mm:ss') })
                     }}
                   />
                 </LocalizationProvider>
@@ -118,14 +118,14 @@ WAS UPDATED SUCCESSFULLY!'
               <TextField
                 id='standard-serial-number'
                 label='Serial Number'
-                value={device.serial_num}
+                value={device?.SerialNumber}
                 variant='standard'
                 className='!mb-6'
               />
               <TextField
                 id='standard-room-number'
                 label='Room Number'
-                value={device.room_num}
+                value={device.Room_No}
                 variant='standard'
                 className='!mb-6'
               />
