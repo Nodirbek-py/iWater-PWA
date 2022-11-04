@@ -71,6 +71,8 @@ const Install = () => {
                   variant='standard'
                   className='!mb-12'
                   name='roomNumber'
+                  type='number'
+                  step='1'
                   onChange={(e) => changeHandler(e)}
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -118,7 +120,7 @@ WAS UPDATED SUCCESSFULLY!'
               <TextField
                 id='standard-serial-number'
                 label='Serial Number'
-                value={device?.SerialNumber}
+                value={device?.SerialNumber || form.roomNumber}
                 variant='standard'
                 className='!mb-6'
               />
