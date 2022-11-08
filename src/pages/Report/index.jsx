@@ -45,6 +45,9 @@ const Report = () => {
             value={device.SerialNumber}
             variant='standard'
             className='!mb-6'
+            InputProps={{
+              readOnly: true,
+            }}
           />
           <TextField
             id='standard-room-number'
@@ -52,22 +55,29 @@ const Report = () => {
             value={device.Room_No}
             variant='standard'
             className='!mb-6'
+            InputProps={{
+              readOnly: true,
+            }}
           />
           <TextField
             id='standard-shower-count'
             label='Total Shower Count'
-            value={form.showerCount}
+            value={device.Shower_Count ? device.Shower_Count : 'NA'}
             variant='standard'
             className='!mb-6'
             name='showerCount'
             onChange={(e) => changeHandler(e)}
+            InputProps={{
+              readOnly: true,
+            }}
           />
           <TextField
             id='standard-water-saved'
             label='Total Water Saved'
-            value={form.waterSaved}
+            value={device.Water_Saved ? device.Water_Saved : 'NA'}
             InputProps={{
               endAdornment: <InputAdornment position='end'>L</InputAdornment>,
+              readOnly: true,
             }}
             variant='standard'
             className='!mb-6'
@@ -81,7 +91,12 @@ const Report = () => {
                 inputFormat='MM/DD/YYYY'
                 className='!mb-6 w-full'
                 renderInput={(params) => (
-                  <TextField {...params} variant='standard' className='!mb-6 w-full' />
+                  <TextField
+                    {...params}
+                    variant='standard'
+                    className='!mb-6 w-full'
+                    helperText='Hello'
+                  />
                 )}
                 name='dateOfIssue'
                 value={form.dateOfIssue}

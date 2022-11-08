@@ -105,8 +105,11 @@ const Auth = () => {
             className='!mb-14'
             {...register('username', { required: 'This field may not be blank' })}
             value={watch('username')}
-            helperText={errors.username?.type === 'required' && errors.username?.message}
-            error={errors.username?.type === 'required'}
+            helperText={
+              (errors.username?.type === 'required' && errors.username?.message) ||
+              (error.username && error?.username[0])
+            }
+            error={errors.username?.type === 'required' || (error.username && error?.username[0])}
           />
           <TextField
             id='standard-email'
@@ -140,9 +143,9 @@ const Auth = () => {
             value={watch('password')}
             helperText={
               (errors.password?.type === 'required' && errors.first_name?.message) ||
-              error.password[0]
+              (error.password && error?.password[0])
             }
-            error={errors.password?.type === 'required' || error.password[0]}
+            error={errors.password?.type === 'required' || (error.password && error?.password[0])}
           />
           <TextField
             id='standard-password2'
@@ -156,9 +159,9 @@ const Auth = () => {
             value={watch('password2')}
             helperText={
               (errors.password?.type === 'required' && errors.first_name?.message) ||
-              error.password[0]
+              (error.password && error?.password[0])
             }
-            error={errors.password?.type === 'required' || error.password[0]}
+            error={errors.password?.type === 'required' || (error.password && error?.password[0])}
           />
           <Button
             onClick={handleSubmit(onSubmitRegister)}

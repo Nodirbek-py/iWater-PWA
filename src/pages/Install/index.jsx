@@ -42,7 +42,7 @@ const Install = () => {
               <TextField
                 id='standard-water-saved'
                 label='Total Water Saved'
-                value='2000L'
+                value={device.Water_Saved ? device.Water_Saved : 'NA'}
                 variant='standard'
                 className='!mb-6'
               />
@@ -121,6 +121,9 @@ WAS UPDATED SUCCESSFULLY!'
                 id='standard-serial-number'
                 label='Serial Number'
                 value={device?.SerialNumber || form.roomNumber}
+                InputProps={{
+                  readOnly: true,
+                }}
                 variant='standard'
                 className='!mb-6'
               />
@@ -128,6 +131,9 @@ WAS UPDATED SUCCESSFULLY!'
                 id='standard-room-number'
                 label='Room Number'
                 value={device.Room_No}
+                InputProps={{
+                  readOnly: true,
+                }}
                 variant='standard'
                 className='!mb-6'
               />

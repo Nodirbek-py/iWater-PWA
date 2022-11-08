@@ -80,7 +80,7 @@ const useHook = () => {
       user: jwtDecode(localStorage.getItem('access_token')).user_id,
       SerialNumber: device.SerialNumber,
       Room_no: device.Room_No,
-      is_device_installed: 0,
+      Is_Device_Installed: 0,
     }
     /* eslint-enable */
     try {
