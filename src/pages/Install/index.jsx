@@ -143,7 +143,7 @@ WAS UPDATED SUCCESSFULLY!'
                   readOnly: true,
                 }}
                 variant='standard'
-                className='!mb-6'
+                className='!mb-6 no-animation'
               />
               <TextField
                 id='standard-room-number'
@@ -153,7 +153,7 @@ WAS UPDATED SUCCESSFULLY!'
                   readOnly: true,
                 }}
                 variant='standard'
-                className='!mb-6'
+                className='!mb-6 no-animation'
               />
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <MobileDatePicker

@@ -1,0 +1,15 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  height: 100vh;
+}
+
+.no-animation .MuiInput-root::after {
+  content: '';
+  border-bottom: none !important;
+}
+
+.no-animation .MuiFormLabel-root {
+  color: rgba(0, 0, 0, 0.6) !important;
+}

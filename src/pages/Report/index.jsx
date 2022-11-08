@@ -44,7 +44,7 @@ const Report = () => {
             label='Serial Number'
             value={device.SerialNumber}
             variant='standard'
-            className='!mb-6'
+            className='!mb-6 no-animation'
             InputProps={{
               readOnly: true,
             }}
@@ -54,7 +54,7 @@ const Report = () => {
             label='Room Number'
             value={device.Room_No}
             variant='standard'
-            className='!mb-6'
+            className='!mb-6 no-animation'
             InputProps={{
               readOnly: true,
             }}
@@ -64,7 +64,7 @@ const Report = () => {
             label='Total Shower Count'
             value={device.Shower_Count ? device.Shower_Count : 'NA'}
             variant='standard'
-            className='!mb-6'
+            className='!mb-6 no-animation'
             name='showerCount'
             onChange={(e) => changeHandler(e)}
             InputProps={{
@@ -80,7 +80,7 @@ const Report = () => {
               readOnly: true,
             }}
             variant='standard'
-            className='!mb-6'
+            className='!mb-6 no-animation'
             name='waterSaved'
             onChange={(e) => changeHandler(e)}
           />

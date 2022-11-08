@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import Welcome from './pages/Welcome'
 
 function App() {
