@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
@@ -10,6 +11,7 @@ const useHook = () => {
     installDate: '',
     roomNumber: '',
   })
+  const navigate = useNavigate()
 
   const changeHandler = (e) => {
     let formCopy = { ...form }
@@ -18,9 +20,34 @@ const useHook = () => {
   }
   useEffect(() => {
     let device = JSON.parse(localStorage.getItem('device'))
+    if (device.Room_No !== '') {
+      setForm({ ...form, roomNumber: device.Room_No })
+    }
     setDevice(device)
     setLoading(false)
   }, [])
+
+  const updateDevice = async () => {
+    // /* eslint-disable */
+    // let data = {
+    //   user: jwtDecode(localStorage.getItem('access_token')).user_id,
+    //   SerialNumber: device.SerialNumber,
+    //   Room_no: form.roomNumber,
+    //   Is_Device_Installed: 0,
+    // }
+    // /* eslint-enable */
+    // try {
+    //   const response = await axios.post(import.meta.env.VITE_BASE_API + 'update/', data, {
+    //     headers: {
+    //       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    //     },
+    //   })
+    //   if (response.status === 201 && response.statusText === 'Created') navigate('/success')
+    // } catch (error) {
+    //   throw new Error(error)
+    // }
+    console.log('Mocking Updating')
+  }
 
   const installDevice = async () => {
     /* eslint-disable */
@@ -46,7 +73,7 @@ const useHook = () => {
     }
   }
 
-  return { form, device, loading, changeHandler, tab, setTab, setForm, installDevice }
+  return { form, device, loading, changeHandler, tab, setTab, setForm, installDevice, updateDevice }
 }
 
 export default useHook

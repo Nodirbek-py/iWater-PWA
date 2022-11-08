@@ -10,7 +10,8 @@ import Button from '../../components/Button'
 import useHook from './hook'
 
 const Install = () => {
-  const { form, changeHandler, device, loading, tab, setTab, setForm, installDevice } = useHook()
+  const { form, changeHandler, device, loading, tab, setTab, setForm, installDevice, update } =
+    useHook()
   return (
     <div className='flex flex-col justify-center relative mx-auto w-5/6'>
       {loading ? (
@@ -20,11 +21,19 @@ const Install = () => {
           {' '}
           {tab === 'step1' ? (
             <>
-              <Typography
-                type='error'
-                text='WE FOUND THAT DEVICE. HERE IS THE INFORMATION BELOW.'
-                style={{ marginBottom: 30 }}
-              />
+              {device.Room_No === '' ? (
+                <Typography
+                  type='error'
+                  text='WE FOUND THAT DEVICE. HERE IS THE INFORMATION BELOW.'
+                  style={{ marginBottom: 30 }}
+                />
+              ) : (
+                <Typography
+                  type='error'
+                  text='THIS DEVICE IS INSTALLED,  YOU CAN UPDATE ROOM NUMBER HERE'
+                  style={{ marginBottom: 30 }}
+                />
+              )}
               <TextField
                 id='standard-serial-number'
                 label='Serial Number'
@@ -33,11 +42,16 @@ const Install = () => {
                 className='!mb-6'
               />
               <TextField
+                type='number'
+                pattern='[0-9]'
+                step='1'
                 id='standard-room-number'
                 label='Room Number'
-                value={device.Room_No || form.roomNumber}
+                value={form.roomNumber || device.Room_No}
                 variant='standard'
                 className='!mb-6'
+                name='roomNumber'
+                onChange={(e) => changeHandler(e)}
               />
               <TextField
                 id='standard-water-saved'
@@ -46,12 +60,16 @@ const Install = () => {
                 variant='standard'
                 className='!mb-6'
               />
-              <Button
-                title='Install'
-                type='blue'
-                className='w-auto mx-auto'
-                onClick={() => setTab('step2')}
-              />
+              {device.Room_No === '' ? (
+                <Button
+                  title='Install'
+                  type='blue'
+                  className='w-auto mx-auto'
+                  onClick={() => setTab('step2')}
+                />
+              ) : (
+                <Button title='Update' type='blue' className='w-auto mx-auto' onClick={update} />
+              )}
             </>
           ) : tab === 'step2' ? (
             <>
