@@ -58,7 +58,10 @@ const Install = () => {
                 label='Total Water Saved'
                 value={device.Water_Saved ? device.Water_Saved : 'NA'}
                 variant='standard'
-                className='!mb-6'
+                className='!mb-6 no-animation'
+                InputProps={{
+                  readOnly: true,
+                }}
               />
               {device.Room_No === '' ? (
                 <Button
@@ -148,7 +151,7 @@ WAS UPDATED SUCCESSFULLY!'
               <TextField
                 id='standard-room-number'
                 label='Room Number'
-                value={device.Room_No}
+                value={form.roomNumber}
                 InputProps={{
                   readOnly: true,
                 }}
